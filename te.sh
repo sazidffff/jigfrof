@@ -6,7 +6,7 @@ passwdvnc="123456"
 sudo apt update && sudo apt full-upgrade -y
 
 sudo DEBIAN_FRONTEND=noninteractive \
-    apt install --assume-yes xfce4 xfce4-goodies desktop-base dbus-x11 qbittorrent tightvncserver
+    apt install --assume-yes ubuntu-mate-desktop mate* desktop-base dbus-x11 qbittorrent tightvncserver
 
 wget -c https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz -O - | tar -xz
 
@@ -28,7 +28,7 @@ vncserver
 
 vncserver -kill :1
 
-sudo echo "/usr/bin/xfce4-session &" >>  ~/.vnc/xstartup
+sudo echo "/usr/bin/mate-session &" >>  ~/.vnc/xstartup
 
 sudo chmod +x ~/.vnc/xstartup
 
@@ -48,4 +48,6 @@ vncserver :1 -geometry 2160x1080 -depth 24
 
 echo "region: in" >> $HOME/.config/ngrok/ngrok.yml
 
-ngrok tcp 5901
+sudo echo -e "vncserver :1 -geometry 2160x1080 -depth 24\n python3 -m http.server 9999 & \n ngrok tcp 5901" > /usr/bin/st
+
+sudo chmod +x /usr/bin/st
